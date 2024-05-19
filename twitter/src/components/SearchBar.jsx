@@ -22,6 +22,7 @@ const SearchBox = styled.input`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, sans-serif;
     font-size: 15px;
+    color: white;
 `;
 
 const ImgBox = styled.div`

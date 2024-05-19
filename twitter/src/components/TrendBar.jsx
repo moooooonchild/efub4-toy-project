@@ -36,15 +36,15 @@ const TrendBar = () => {
             <SearchBar />
             <TrendContainer>
                 <TrendsForMe>Trends for you</TrendsForMe>
-                <TrendContent name={"김선우 너구리"} postNum={"20,136"} />
-                <TrendContent name={"리를빗 챌린지"} postNum={"20,136"} />
-                <TrendContent name={"더보이즈"} postNum={"20,136"} />
-                <TrendContent name={"더보이즈 컴백"} postNum={"20,136"} />
-                <TrendContent name={"선우 귀여워"} postNum={"20,136"} />
-                <TrendContent name={"선우 사랑해"} postNum={"20,136"} />
-                <TrendContent name={"선우 보고싶어"} postNum={"20,136"} />
-                <TrendContent name={"덥뮤다선"} postNum={"20,136"} />
-                <TrendContent name={"붐이 오길"} postNum={"20,136"} />
+                <TrendContent name={"실트 1위"} postNum={"20,136"} />
+                <TrendContent name={"실트 2위"} postNum={"20,136"} />
+                <TrendContent name={"실트 3위"} postNum={"20,136"} />
+                <TrendContent name={"실트 4위"} postNum={"20,136"} />
+                <TrendContent name={"실트 5위"} postNum={"20,136"} />
+                <TrendContent name={"실트 6위"} postNum={"20,136"} />
+                <TrendContent name={"실트 7위"} postNum={"20,136"} />
+                <TrendContent name={"실트 8위"} postNum={"20,136"} />
+                <TrendContent name={"실트 10000위"} postNum={"20,136"} />
             </TrendContainer>
         </ContentContainer>
     );

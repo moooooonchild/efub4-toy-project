@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
 
-import Tweet from "../components/Tweet";
-
 import egg from "../assets/egg.PNG";
+import TweetContainer from "../components/TweetContainer";
 
 const MainContainer = styled.div`
     display: flex;
@@ -146,8 +145,6 @@ const ChosenBar = styled.div`
     z-index: 1;
 `;
 
-const TweetContainer = styled.div``;
-
 const RowLine = styled.div`
     border-bottom: 1px solid #252525;
     width: 100%;
@@ -214,32 +211,7 @@ const Profile = () => {
                 <NavContent>Likes</NavContent>
             </ProfNavBar>
             <RowLine />
-            <TweetContainer>
-                <Tweet
-                    img={egg}
-                    name={"알"}
-                    id={"@dontbreakme"}
-                    text={"테스트1"}
-                />
-                <Tweet
-                    img={egg}
-                    name={"알"}
-                    id={"@dontbreakme"}
-                    text={"테스트2"}
-                />
-                <Tweet
-                    img={egg}
-                    name={"알"}
-                    id={"@dontbreakme"}
-                    text={"테스트3"}
-                />
-                <Tweet
-                    img={egg}
-                    name={"알"}
-                    id={"@dontbreakme"}
-                    text={"테스트4"}
-                />
-            </TweetContainer>
+            <TweetContainer />
         </MainContainer>
     );
 };

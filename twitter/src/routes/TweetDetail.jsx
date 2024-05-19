@@ -11,6 +11,8 @@ import { IoIosMore } from "react-icons/io";
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import DeleteModal from "../components/DeleteModal";
+
 const ContentContainer = styled.div`
     width: 566px;
     display: flex;
@@ -154,12 +156,21 @@ const TweetDetail = () => {
         setData(location.state.data);
     }, []);
 
+    const [isModalOpen, setIsModalOpen] = useState("false");
+
+    const modalHandler = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        setIsModalOpen(!isModalOpen);
+    };
+
     if (!data) {
         return <div>Loading...</div>;
     }
 
     return (
         <ContentContainer>
+            <DeleteModal isOpen={isModalOpen} modalHandler={modalHandler} />
             <Header>
                 <Arrow onClick={() => nav(-1)} />
                 <div style={{ fontSize: "20px", fontWeight: "bold" }}>Post</div>
@@ -171,7 +182,7 @@ const TweetDetail = () => {
                         <Name>{data.name}</Name>
                         <Id>{data.id}</Id>
                     </div>
-                    <More />
+                    <More onClick={modalHandler} />
                 </IdBar>
                 <TweetText>{data.text}</TweetText>
                 <TweetInfo>4:12 PMㆍDec 6, 2017ㆍ100 Views</TweetInfo>

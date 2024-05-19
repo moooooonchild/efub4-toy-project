@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FiSettings } from "react-icons/fi";
 
 import egg from "../assets/egg.PNG";
+import TweetContainer from "../components/TweetContainer";
 
 const MainContainer = styled.div`
     width: 598px;
@@ -74,32 +75,7 @@ const Home = () => {
             <RowLine />
             <WritePost />
             <RowLine />
-            <div>
-                <Tweet
-                    img={egg}
-                    name={"알"}
-                    id={"@dontbreakme"}
-                    text={"테스트1"}
-                />
-                <Tweet
-                    img={egg}
-                    name={"알"}
-                    id={"@dontbreakme"}
-                    text={"테스트2"}
-                />
-                <Tweet
-                    img={egg}
-                    name={"알"}
-                    id={"@dontbreakme"}
-                    text={"테스트3"}
-                />
-                <Tweet
-                    img={egg}
-                    name={"알"}
-                    id={"@dontbreakme"}
-                    text={"테스트4"}
-                />
-            </div>
+            <TweetContainer />
         </MainContainer>
     );
 };

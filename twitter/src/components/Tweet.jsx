@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import DeleteModal from "./DeleteModal";
 
 import { FaRegComment } from "react-icons/fa";
 import { FaRetweet } from "react-icons/fa6";
@@ -8,6 +9,7 @@ import { IoIosStats } from "react-icons/io";
 import { FaRegBookmark } from "react-icons/fa";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { IoIosMore } from "react-icons/io";
+import { useState } from "react";
 
 const ContentContainer = styled(Link)`
     display: flex;
@@ -99,6 +101,7 @@ const More = styled(IoIosMore)`
     width: 18.75px;
     color: #71767b;
     margin-left: auto;
+    z-index: 1;
 `;
 
 const Tweet = ({ img, name, id, text }) => {
@@ -109,14 +112,33 @@ const Tweet = ({ img, name, id, text }) => {
         text: text,
     };
 
+    const [isModalOpen, setIsModalOpen] = useState("false");
+
+    const modalHandler = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        setIsModalOpen(!isModalOpen);
+    };
+
     return (
         <ContentContainer to={`/detail`} state={{ data: data }}>
-            <ProfPic src={img} />
+            <DeleteModal isOpen={isModalOpen} modalHandler={modalHandler} />
+            <Link
+                to={"/profile"}
+                style={{
+                    textDecoration: "none",
+                    width: "50px",
+                    height: "50px",
+                }}
+            >
+                <ProfPic src={img} />
+            </Link>
+
             <TweetContainer>
                 <IdBar>
                     <Name>{name}</Name>
                     <Id>{id}</Id>
-                    <More />
+                    <More onClick={modalHandler} />
                 </IdBar>
                 <TweetText>{text}</TweetText>
                 <IconBar>
