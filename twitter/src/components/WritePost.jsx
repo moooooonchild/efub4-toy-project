@@ -73,6 +73,11 @@ const PostBtn = styled.button`
     border-radius: 30px;
     background-color: #1d9bf0;
     color: white;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
 `;
 
 const WritePost = () => {

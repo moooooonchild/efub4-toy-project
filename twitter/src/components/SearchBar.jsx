@@ -18,6 +18,10 @@ const SearchBox = styled.input`
     height: 42px;
     border-radius: 0 30px 30px 0;
     background-color: #252525;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
 `;
 
 const ImgBox = styled.div`
@@ -34,12 +38,12 @@ const ImgBox = styled.div`
 
 const SearchBar = () => {
     return (
-        <div style={{ display: "flex" }}>
+        <Container>
             <ImgBox>
                 <img src={explore} width={16} height={16} />
             </ImgBox>
             <SearchBox placeholder="Search"></SearchBox>
-        </div>
+        </Container>
     );
 };
 

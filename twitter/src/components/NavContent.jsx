@@ -11,6 +11,9 @@ const ContentContainer = styled.div`
 const NavText = styled.div`
     margin-left: 16px;
     margin-right: 20px;
+
+    font-size: 20px;
+    color: #e7e9ea;
 `;
 
 const NavContent = ({ img, name }) => {

@@ -20,6 +20,8 @@ import pen from "../assets/quill-pen.png";
 
 const NavContainer = styled.div`
     width: 242px;
+    display: flex;
+    flex-direction: column;
 `;
 
 const HomeButton = styled.div`
@@ -49,7 +51,13 @@ const PostButton = styled.button`
     justify-content: center;
     align-items: center;
 
+    margin-top: 10px;
+
     color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
 `;
 
 const NavBar = () => {
@@ -60,7 +68,9 @@ const NavBar = () => {
             </HomeButton>
 
             <div>
-                <NavContent img={home} name={"Home"} />
+                <Link to="/" style={{ textDecoration: "none" }}>
+                    <NavContent img={home} name={"Home"} />
+                </Link>
                 <NavContent img={explore} name={"Explore"} />
                 <NavContent img={bell} name={"Notifications"} />
                 <NavContent img={envelope} name={"Messages"} />
@@ -69,12 +79,13 @@ const NavBar = () => {
                 <NavContent img={bookmark} name={"Bookmarks"} />
                 <NavContent img={users} name={"Communities"} />
                 <NavContent img={twitter} name={"Premium"} />
-                <NavContent img={user} name={"Profile"} />
+                <Link to="/profile" style={{ textDecoration: "none" }}>
+                    <NavContent img={user} name={"Profile"} />
+                </Link>
+
                 <NavContent img={more} name={"More"} />
             </div>
-            <PostButton>
-                <div>post</div>
-            </PostButton>
+            <PostButton>Post</PostButton>
             <ProfileButton />
         </NavContainer>
     );

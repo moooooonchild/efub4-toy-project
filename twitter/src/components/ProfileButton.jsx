@@ -8,6 +8,8 @@ const ProfButton = styled.div`
     justify-content: center;
     align-items: center;
     padding: 12px;
+
+    //margin-top: auto;
 `;
 
 const ProfPic = styled.img`
@@ -20,6 +22,8 @@ const MyId = styled.div`
     display: flex;
     flex-direction: column;
     margin: 10px;
+
+    font-size: 15px;
 `;
 
 const More = styled(IoIosMore)`
@@ -33,8 +37,8 @@ const ProfileButton = () => {
         <ProfButton>
             <ProfPic src={egg} />
             <MyId>
-                <div>알</div>
-                <div>@dontbreakme</div>
+                <div style={{ fontWeight: "bold" }}>알</div>
+                <div style={{ color: "darkgray" }}>@dontbreakme</div>
             </MyId>
             <More />
         </ProfButton>

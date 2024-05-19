@@ -26,7 +26,15 @@ const TrendContent = ({ name, postNum }) => {
                 <div style={{ fontSize: "13px", color: "#71767B" }}>
                     대한민국에서 트렌드 중
                 </div>
-                <div style={{ fontSize: "15px", color: "#E7E9EA" }}>{name}</div>
+                <div
+                    style={{
+                        fontSize: "15px",
+                        color: "#E7E9EA",
+                        fontWeight: "bold",
+                    }}
+                >
+                    {name}
+                </div>
                 <div style={{ fontSize: "13px", color: "#71767B" }}>
                     {postNum} posts
                 </div>

@@ -5,7 +5,6 @@ import styled from "styled-components";
 const ContentContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 348px;
     padding-top: 5px;
     padding-left: 20px;
@@ -26,6 +25,7 @@ const TrendContainer = styled.div`
 
 const TrendsForMe = styled.div`
     font-size: 20px;
+    font-weight: bold;
     color: #e7e9ea;
     padding: 12px 16px;
 `;
