@@ -26,6 +26,7 @@ function App() {
     useEffect(() => {
         async function makeAccount() {
             const BASE_URL = process.env.REACT_APP_API_URL;
+            console.log(BASE_URL);
 
             try {
                 const response = await axios.get(`${BASE_URL}accounts/1`);
