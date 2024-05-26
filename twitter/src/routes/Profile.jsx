@@ -2,9 +2,113 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
+import axios from "axios";
 
 import egg from "../assets/egg.PNG";
 import TweetContainer from "../components/TweetContainer";
+import { useEffect, useState } from "react";
+
+const Profile = () => {
+    const nav = useNavigate();
+    const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const URL = "/accounts/1";
+
+        async function getUserData() {
+            try {
+                setLoading(true);
+                const res = await axios.get(URL);
+                console.log(res.data);
+                setUserData(res.data);
+                setLoading(false);
+                console.log("성공");
+            } catch (error) {
+                console.error(error);
+                console.log("실패");
+            }
+        }
+
+        getUserData();
+    }, []);
+
+    return (
+        <MainContainer>
+            {loading ? (
+                <div>loading...</div>
+            ) : (
+                <>
+                    <Header>
+                        <Arrow onClick={() => nav(-1)} />
+
+                        <div
+                            style={{ display: "flex", flexDirection: "column" }}
+                        >
+                            <div
+                                style={{ fontSize: "20px", fontWeight: "bold" }}
+                            >
+                                {userData.nickname}
+                            </div>
+                            <div
+                                style={{ fontSize: "13px", color: "darkgray" }}
+                            >
+                                412 posts
+                            </div>
+                        </div>
+                    </Header>
+                    <HeaderImg src="https://media.istockphoto.com/id/519518676/ko/%EC%82%AC%EC%A7%84/%ED%94%84%EB%9D%BC%EC%9D%B4%EB%93%9C-%EC%97%90%EA%B7%B8-%EA%B5%AC%EC%9A%B4-%EB%B9%B5.jpg?s=612x612&w=0&k=20&c=sJPzsFwjOyVbAD7VF5PrC3f5GqNLhDNpyK8YlYOfA-0=" />
+                    <InfoContainer>
+                        <ProfileImg src={egg} />
+                        <BtnContainer>
+                            <EditBtn>Edit Profile</EditBtn>
+                        </BtnContainer>
+                        <NamenId>
+                            <div
+                                style={{ fontSize: "20px", fontWeight: "bold" }}
+                            >
+                                {userData?.nickname}
+                            </div>
+                            <div
+                                style={{ fontSize: "15px", color: "darkgray" }}
+                            >
+                                {`@dontbreakme_${userData?.accountId}`}
+                            </div>
+                        </NamenId>
+                        <div>{userData?.bio}</div>
+                        <JoinedDate>
+                            <CalendarImg />
+                            <div>Joined May 2024</div>
+                        </JoinedDate>
+                        <FollowInfo>
+                            <div>
+                                <Num>6</Num> Following
+                            </div>
+                            <div>
+                                <Num>14</Num> Followers
+                            </div>
+                        </FollowInfo>
+                    </InfoContainer>
+                    <ProfNavBar>
+                        <NavContent>
+                            Posts
+                            <ChosenBar />
+                        </NavContent>
+                        <NavContent>Replies</NavContent>
+                        <NavContent>Highlights</NavContent>
+                        <NavContent>Articles</NavContent>
+                        <NavContent>Media</NavContent>
+                        <NavContent>Likes</NavContent>
+                    </ProfNavBar>
+                    <RowLine />
+                    <TweetContainer isProf={true} />
+                </>
+            )}
+        </MainContainer>
+    );
+};
+
+export default Profile;
 
 const MainContainer = styled.div`
     display: flex;
@@ -150,70 +254,3 @@ const RowLine = styled.div`
     width: 100%;
     margin: 0 auto;
 `;
-
-const Profile = () => {
-    const nav = useNavigate();
-
-    return (
-        <MainContainer>
-            <Header>
-                <Arrow onClick={() => nav(-1)} />
-
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div style={{ fontSize: "20px", fontWeight: "bold" }}>
-                        알
-                    </div>
-                    <div style={{ fontSize: "13px", color: "darkgray" }}>
-                        412 posts
-                    </div>
-                </div>
-            </Header>
-            <HeaderImg src="https://media.istockphoto.com/id/519518676/ko/%EC%82%AC%EC%A7%84/%ED%94%84%EB%9D%BC%EC%9D%B4%EB%93%9C-%EC%97%90%EA%B7%B8-%EA%B5%AC%EC%9A%B4-%EB%B9%B5.jpg?s=612x612&w=0&k=20&c=sJPzsFwjOyVbAD7VF5PrC3f5GqNLhDNpyK8YlYOfA-0=" />
-            <InfoContainer>
-                <ProfileImg src={egg} />
-                <BtnContainer>
-                    <EditBtn>Edit Profile</EditBtn>
-                </BtnContainer>
-                <NamenId>
-                    <div style={{ fontSize: "20px", fontWeight: "bold" }}>
-                        알
-                    </div>
-                    <div style={{ fontSize: "15px", color: "darkgray" }}>
-                        @dontbreakme
-                    </div>
-                </NamenId>
-                <div>
-                    새는 알에서 나오기 위해 투쟁한다. 알은 새의 세계이다.
-                    누구든지 태어나려고 하는 자는 하나의 세계를 파괴하여야 한다.
-                </div>
-                <JoinedDate>
-                    <CalendarImg />
-                    <div>Joined May 2024</div>
-                </JoinedDate>
-                <FollowInfo>
-                    <div>
-                        <Num>6</Num> Following
-                    </div>
-                    <div>
-                        <Num>14</Num> Followers
-                    </div>
-                </FollowInfo>
-            </InfoContainer>
-            <ProfNavBar>
-                <NavContent>
-                    Posts
-                    <ChosenBar />
-                </NavContent>
-                <NavContent>Replies</NavContent>
-                <NavContent>Highlights</NavContent>
-                <NavContent>Articles</NavContent>
-                <NavContent>Media</NavContent>
-                <NavContent>Likes</NavContent>
-            </ProfNavBar>
-            <RowLine />
-            <TweetContainer />
-        </MainContainer>
-    );
-};
-
-export default Profile;

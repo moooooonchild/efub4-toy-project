@@ -11,6 +11,79 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
 
+const Tweet = ({ tweetId, img, name, accountId, text }) => {
+    const data = {
+        tweetId: tweetId,
+        img: img,
+        name: name,
+        accountId: accountId,
+        text: text,
+    };
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const modalHandler = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        setIsModalOpen(!isModalOpen);
+    };
+
+    return (
+        <ContentContainer to={`/detail`} state={{ data: data }}>
+            <DeleteModal
+                isOpen={isModalOpen}
+                modalHandler={modalHandler}
+                twtId={tweetId}
+                accountId={accountId}
+            />
+            <Link
+                to={"/profile"}
+                style={{
+                    textDecoration: "none",
+                    width: "50px",
+                    height: "50px",
+                }}
+            >
+                <ProfPic src={img} />
+            </Link>
+
+            <TweetContainer>
+                <IdBar>
+                    <Name>{name}</Name>
+                    <Id>{`@dontbreakme_${accountId}`}</Id>
+                    <More onClick={modalHandler} />
+                </IdBar>
+                <TweetText>{text}</TweetText>
+                <IconBar>
+                    <Icon>
+                        <FaRegComment />
+                    </Icon>
+                    <Icon>
+                        <FaRetweet />
+                    </Icon>
+                    <Icon>
+                        <FaRegHeart />
+                    </Icon>
+                    <Icon>
+                        <IoIosStats />
+                    </Icon>
+                    <IconGroup>
+                        <Icon>
+                            <FaRegBookmark />
+                        </Icon>
+                        <Icon>
+                            <MdOutlineFileUpload />
+                        </Icon>
+                    </IconGroup>
+                </IconBar>
+                <RowLine />
+            </TweetContainer>
+        </ContentContainer>
+    );
+};
+
+export default Tweet;
+
 const ContentContainer = styled(Link)`
     display: flex;
     justify-content: center;
@@ -103,70 +176,3 @@ const More = styled(IoIosMore)`
     margin-left: auto;
     z-index: 1;
 `;
-
-const Tweet = ({ img, name, id, text }) => {
-    const data = {
-        img: img,
-        name: name,
-        id: id,
-        text: text,
-    };
-
-    const [isModalOpen, setIsModalOpen] = useState("false");
-
-    const modalHandler = (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-        setIsModalOpen(!isModalOpen);
-    };
-
-    return (
-        <ContentContainer to={`/detail`} state={{ data: data }}>
-            <DeleteModal isOpen={isModalOpen} modalHandler={modalHandler} />
-            <Link
-                to={"/profile"}
-                style={{
-                    textDecoration: "none",
-                    width: "50px",
-                    height: "50px",
-                }}
-            >
-                <ProfPic src={img} />
-            </Link>
-
-            <TweetContainer>
-                <IdBar>
-                    <Name>{name}</Name>
-                    <Id>{id}</Id>
-                    <More onClick={modalHandler} />
-                </IdBar>
-                <TweetText>{text}</TweetText>
-                <IconBar>
-                    <Icon>
-                        <FaRegComment />
-                    </Icon>
-                    <Icon>
-                        <FaRetweet />
-                    </Icon>
-                    <Icon>
-                        <FaRegHeart />
-                    </Icon>
-                    <Icon>
-                        <IoIosStats />
-                    </Icon>
-                    <IconGroup>
-                        <Icon>
-                            <FaRegBookmark />
-                        </Icon>
-                        <Icon>
-                            <MdOutlineFileUpload />
-                        </Icon>
-                    </IconGroup>
-                </IconBar>
-                <RowLine />
-            </TweetContainer>
-        </ContentContainer>
-    );
-};
-
-export default Tweet;

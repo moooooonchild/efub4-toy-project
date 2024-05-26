@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+const NavContent = ({ img, name }) => {
+    return (
+        <ContentContainer>
+            <img src={img} width="25" />
+            <NavText>{name}</NavText>
+        </ContentContainer>
+    );
+};
+
+export default NavContent;
+
 const ContentContainer = styled.div`
     width: 242px;
     height: 50.25px;
@@ -15,14 +26,3 @@ const NavText = styled.div`
     font-size: 20px;
     color: #e7e9ea;
 `;
-
-const NavContent = ({ img, name }) => {
-    return (
-        <ContentContainer>
-            <img src={img} width="25" />
-            <NavText>{name}</NavText>
-        </ContentContainer>
-    );
-};
-
-export default NavContent;

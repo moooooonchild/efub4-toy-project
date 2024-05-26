@@ -1,24 +1,6 @@
 import styled from "styled-components";
 import { IoIosMore } from "react-icons/io";
 
-const ContentContainer = styled.div`
-    width: 348px;
-    height: 62px;
-
-    padding: 12px;
-
-    display: flex;
-`;
-
-const TrendInfo = styled.div`
-    width: 300px;
-`;
-
-const More = styled(IoIosMore)`
-    width: 18.75px;
-    color: #71767b;
-`;
-
 const TrendContent = ({ name, postNum }) => {
     return (
         <ContentContainer>
@@ -45,3 +27,21 @@ const TrendContent = ({ name, postNum }) => {
 };
 
 export default TrendContent;
+
+const ContentContainer = styled.div`
+    width: 348px;
+    height: 62px;
+
+    padding: 12px;
+
+    display: flex;
+`;
+
+const TrendInfo = styled.div`
+    width: 300px;
+`;
+
+const More = styled(IoIosMore)`
+    width: 18.75px;
+    color: #71767b;
+`;

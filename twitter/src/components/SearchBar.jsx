@@ -2,6 +2,19 @@ import styled from "styled-components";
 
 import explore from "../assets/explore.svg";
 
+const SearchBar = () => {
+    return (
+        <Container>
+            <ImgBox>
+                <img src={explore} width={16} height={16} />
+            </ImgBox>
+            <SearchBox placeholder="Search"></SearchBox>
+        </Container>
+    );
+};
+
+export default SearchBar;
+
 const Container = styled.div`
     display: flex;
 `;
@@ -36,16 +49,3 @@ const ImgBox = styled.div`
     align-items: center;
     border-color: #252525;
 `;
-
-const SearchBar = () => {
-    return (
-        <Container>
-            <ImgBox>
-                <img src={explore} width={16} height={16} />
-            </ImgBox>
-            <SearchBox placeholder="Search"></SearchBox>
-        </Container>
-    );
-};
-
-export default SearchBar;

@@ -2,9 +2,49 @@ import Tweet from "../components/Tweet";
 import WritePost from "../components/WritePost";
 import styled from "styled-components";
 import { FiSettings } from "react-icons/fi";
+import axios from "axios";
 
 import egg from "../assets/egg.PNG";
 import TweetContainer from "../components/TweetContainer";
+import { useState, useEffect } from "react";
+
+const Home = () => {
+    return (
+        <MainContainer>
+            <MainHeader>
+                <div
+                    style={{
+                        width: "255px",
+                        textAlign: "center",
+                        color: "darkgray",
+                    }}
+                >
+                    For you
+                </div>
+                <Following>
+                    <div
+                        style={{
+                            paddingTop: "16px",
+                            paddingBottom: "auto",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        Following
+                    </div>
+                    <TimelineChoice />
+                </Following>
+
+                <SettingBtn />
+            </MainHeader>
+            <RowLine />
+            <WritePost />
+            <RowLine />
+            <TweetContainer isProf={false} />
+        </MainContainer>
+    );
+};
+
+export default Home;
 
 const MainContainer = styled.div`
     width: 598px;
@@ -43,41 +83,3 @@ const Following = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
-const Home = () => {
-    return (
-        <MainContainer>
-            <MainHeader>
-                <div
-                    style={{
-                        width: "255px",
-                        textAlign: "center",
-                        color: "darkgray",
-                    }}
-                >
-                    For you
-                </div>
-                <Following>
-                    <div
-                        style={{
-                            paddingTop: "16px",
-                            paddingBottom: "auto",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        Following
-                    </div>
-                    <TimelineChoice />
-                </Following>
-
-                <SettingBtn />
-            </MainHeader>
-            <RowLine />
-            <WritePost />
-            <RowLine />
-            <TweetContainer />
-        </MainContainer>
-    );
-};
-
-export default Home;

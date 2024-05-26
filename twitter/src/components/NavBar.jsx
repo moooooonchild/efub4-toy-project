@@ -18,6 +18,39 @@ import user from "../assets/user.png";
 import more from "../assets/more.png";
 import pen from "../assets/quill-pen.png";
 
+const NavBar = () => {
+    return (
+        <NavContainer>
+            <HomeButton to="/">
+                <AppIcon></AppIcon>
+            </HomeButton>
+
+            <div>
+                <Link to="/" style={{ textDecoration: "none" }}>
+                    <NavContent img={home} name={"Home"} />
+                </Link>
+                <NavContent img={explore} name={"Explore"} />
+                <NavContent img={bell} name={"Notifications"} />
+                <NavContent img={envelope} name={"Messages"} />
+                <NavContent img={slash} name={"Grok"} />
+                <NavContent img={list} name={"Lists"} />
+                <NavContent img={bookmark} name={"Bookmarks"} />
+                <NavContent img={users} name={"Communities"} />
+                <NavContent img={twitter} name={"Premium"} />
+                <Link to="/profile" style={{ textDecoration: "none" }}>
+                    <NavContent img={user} name={"Profile"} />
+                </Link>
+
+                <NavContent img={more} name={"More"} />
+            </div>
+            <PostButton>Post</PostButton>
+            <ProfileButton />
+        </NavContainer>
+    );
+};
+
+export default NavBar;
+
 const NavContainer = styled.div`
     width: 242px;
     display: flex;
@@ -59,36 +92,3 @@ const PostButton = styled.button`
     font-size: 17px;
     font-weight: bold;
 `;
-
-const NavBar = () => {
-    return (
-        <NavContainer>
-            <HomeButton to="/">
-                <AppIcon></AppIcon>
-            </HomeButton>
-
-            <div>
-                <Link to="/" style={{ textDecoration: "none" }}>
-                    <NavContent img={home} name={"Home"} />
-                </Link>
-                <NavContent img={explore} name={"Explore"} />
-                <NavContent img={bell} name={"Notifications"} />
-                <NavContent img={envelope} name={"Messages"} />
-                <NavContent img={slash} name={"Grok"} />
-                <NavContent img={list} name={"Lists"} />
-                <NavContent img={bookmark} name={"Bookmarks"} />
-                <NavContent img={users} name={"Communities"} />
-                <NavContent img={twitter} name={"Premium"} />
-                <Link to="/profile" style={{ textDecoration: "none" }}>
-                    <NavContent img={user} name={"Profile"} />
-                </Link>
-
-                <NavContent img={more} name={"More"} />
-            </div>
-            <PostButton>Post</PostButton>
-            <ProfileButton />
-        </NavContainer>
-    );
-};
-
-export default NavBar;

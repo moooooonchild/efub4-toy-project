@@ -7,11 +7,108 @@ import { IoIosStats } from "react-icons/io";
 import { FaRegBookmark } from "react-icons/fa";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { IoIosMore } from "react-icons/io";
+import egg from "../assets/egg.PNG";
 
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import DeleteModal from "../components/DeleteModal";
+
+const TweetDetail = () => {
+    //state.data id만 넘기게 수정하기
+    const location = useLocation();
+    const [twtId, setTwtId] = useState(null);
+    const [details, setDetails] = useState(null);
+    const nav = useNavigate();
+
+    useEffect(() => {
+        const URL = `/tweets/${location.state.data.tweetId}`;
+
+        async function getDetails() {
+            try {
+                setDetails(null);
+                const res = await axios.get(URL);
+                setDetails(res.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        getDetails();
+    }, []);
+
+    const [isModalOpen, setIsModalOpen] = useState("false");
+
+    const modalHandler = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        setIsModalOpen(!isModalOpen);
+    };
+
+    if (!details) {
+        return <div style={{ width: "598px" }}>Loading...</div>;
+    }
+
+    return (
+        <ContentContainer>
+            <DeleteModal
+                isOpen={isModalOpen}
+                modalHandler={modalHandler}
+                twtId={details.twtId}
+                accountId={details.accountId}
+            />
+            <Header>
+                <Arrow onClick={() => nav(-1)} />
+                <div style={{ fontSize: "20px", fontWeight: "bold" }}>Post</div>
+            </Header>
+            <TweetContainer>
+                <IdBar>
+                    <ProfPic src={egg} />
+                    <div>
+                        <Name>{details.writer}</Name>
+                        <Id>{`dontbreakme_${details.accountId}`}</Id>
+                    </div>
+                    <More onClick={modalHandler} />
+                </IdBar>
+                <TweetText>{details.content}</TweetText>
+                <TweetInfo>4:12 PMㆍDec 6, 2017ㆍ100 Views</TweetInfo>
+            </TweetContainer>
+            <RowLine />
+            <ViewEng>
+                <IoIosStats style={{ marginRight: "5px" }} />
+                <div>View post engagements</div>
+            </ViewEng>
+            <RowLine />
+            <IconBar>
+                <Icon>
+                    <FaRegComment />
+                </Icon>
+                <Icon>
+                    <FaRetweet />
+                </Icon>
+                <Icon>
+                    <FaRegHeart />
+                </Icon>
+                <Icon>
+                    <FaRegBookmark />
+                </Icon>
+                <Icon>
+                    <MdOutlineFileUpload />
+                </Icon>
+            </IconBar>
+            <RowLine />
+            <Reply>
+                <ProfPic src={egg} />
+                <ReplyText placeholder="Post your reply" />
+                <ReplyBtn>Reply</ReplyBtn>
+            </Reply>
+            <RowLine />
+        </ContentContainer>
+    );
+};
+
+export default TweetDetail;
 
 const ContentContainer = styled.div`
     width: 566px;
@@ -147,78 +244,3 @@ const ReplyBtn = styled.button`
     font-size: 15px;
     font-weight: bold;
 `;
-
-const TweetDetail = () => {
-    const location = useLocation();
-    const [data, setData] = useState(null);
-    const nav = useNavigate();
-    useEffect(() => {
-        setData(location.state.data);
-    }, []);
-
-    const [isModalOpen, setIsModalOpen] = useState("false");
-
-    const modalHandler = (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-        setIsModalOpen(!isModalOpen);
-    };
-
-    if (!data) {
-        return <div>Loading...</div>;
-    }
-
-    return (
-        <ContentContainer>
-            <DeleteModal isOpen={isModalOpen} modalHandler={modalHandler} />
-            <Header>
-                <Arrow onClick={() => nav(-1)} />
-                <div style={{ fontSize: "20px", fontWeight: "bold" }}>Post</div>
-            </Header>
-            <TweetContainer>
-                <IdBar>
-                    <ProfPic src={data.img} />
-                    <div>
-                        <Name>{data.name}</Name>
-                        <Id>{data.id}</Id>
-                    </div>
-                    <More onClick={modalHandler} />
-                </IdBar>
-                <TweetText>{data.text}</TweetText>
-                <TweetInfo>4:12 PMㆍDec 6, 2017ㆍ100 Views</TweetInfo>
-            </TweetContainer>
-            <RowLine />
-            <ViewEng>
-                <IoIosStats style={{ marginRight: "5px" }} />
-                <div>View post engagements</div>
-            </ViewEng>
-            <RowLine />
-            <IconBar>
-                <Icon>
-                    <FaRegComment />
-                </Icon>
-                <Icon>
-                    <FaRetweet />
-                </Icon>
-                <Icon>
-                    <FaRegHeart />
-                </Icon>
-                <Icon>
-                    <FaRegBookmark />
-                </Icon>
-                <Icon>
-                    <MdOutlineFileUpload />
-                </Icon>
-            </IconBar>
-            <RowLine />
-            <Reply>
-                <ProfPic src={data.img} />
-                <ReplyText placeholder="Post your reply" />
-                <ReplyBtn>Reply</ReplyBtn>
-            </Reply>
-            <RowLine />
-        </ContentContainer>
-    );
-};
-
-export default TweetDetail;

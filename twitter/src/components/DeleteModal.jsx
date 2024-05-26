@@ -1,5 +1,70 @@
 import styled from "styled-components";
 import { useEffect } from "react";
+import axios from "axios";
+import { GiConsoleController } from "react-icons/gi";
+
+const DeleteModal = ({ isOpen, modalHandler, twtId, accountId }) => {
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [isOpen]);
+
+    async function deleteTweet(twtId, accountId) {
+        const URL = `/tweets/${twtId}?accountId=${accountId}`;
+        console.log(URL);
+        try {
+            const res = await axios.delete(URL);
+            console.log(res.data);
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    return (
+        <Background
+            style={{ display: isOpen ? "flex" : "none" }}
+            onClick={modalHandler}
+        >
+            <Container>
+                <div
+                    style={{
+                        fontSize: "20px",
+                        fontWeight: "bold",
+                        color: "#e8e9ea",
+                        marginBottom: "8px",
+                    }}
+                >
+                    Delete post?
+                </div>
+                <div style={{ fontSize: "15px", color: "darkgray" }}>
+                    This can’t be undone and it will be removed from your
+                    profile, the timeline of any accounts that follow you, and
+                    from search results.
+                </div>
+                <DeleteBtn
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        event.preventDefault();
+                        deleteTweet(twtId, accountId);
+                    }}
+                >
+                    Delete
+                </DeleteBtn>
+                <CancelBtn onClick={modalHandler}>Cancel</CancelBtn>
+            </Container>
+        </Background>
+    );
+};
+
+export default DeleteModal;
 
 const Background = styled.div`
     width: 100%;
@@ -67,50 +132,3 @@ const CancelBtn = styled.button`
     font-weight: bold;
     color: white;
 `;
-
-const DeleteModal = ({ isOpen, modalHandler }) => {
-    useEffect(() => {
-        if (!isOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "unset";
-        }
-
-        return () => {
-            document.body.style.overflow = "unset";
-        };
-    }, [isOpen]);
-
-    const dontPropagate = (event) => {
-        event.stopPropagation();
-    };
-
-    return (
-        <Background
-            style={{ display: isOpen ? "none" : "flex" }}
-            onClick={modalHandler}
-        >
-            <Container onClick={dontPropagate}>
-                <div
-                    style={{
-                        fontSize: "20px",
-                        fontWeight: "bold",
-                        color: "#e8e9ea",
-                        marginBottom: "8px",
-                    }}
-                >
-                    Delete post?
-                </div>
-                <div style={{ fontSize: "15px", color: "darkgray" }}>
-                    This can’t be undone and it will be removed from your
-                    profile, the timeline of any accounts that follow you, and
-                    from search results.
-                </div>
-                <DeleteBtn>Delete</DeleteBtn>
-                <CancelBtn onClick={modalHandler}>Cancel</CancelBtn>
-            </Container>
-        </Background>
-    );
-};
-
-export default DeleteModal;

@@ -3,6 +3,21 @@ import { IoIosMore } from "react-icons/io";
 
 import egg from "../assets/egg.PNG";
 
+const ProfileButton = () => {
+    return (
+        <ProfButton>
+            <ProfPic src={egg} />
+            <MyId>
+                <div style={{ fontWeight: "bold" }}>알</div>
+                <div style={{ color: "darkgray" }}>@dontbreakme</div>
+            </MyId>
+            <More />
+        </ProfButton>
+    );
+};
+
+export default ProfileButton;
+
 const ProfButton = styled.div`
     display: flex;
     justify-content: center;
@@ -31,18 +46,3 @@ const More = styled(IoIosMore)`
     height: 18.75px;
     color: white;
 `;
-
-const ProfileButton = () => {
-    return (
-        <ProfButton>
-            <ProfPic src={egg} />
-            <MyId>
-                <div style={{ fontWeight: "bold" }}>알</div>
-                <div style={{ color: "darkgray" }}>@dontbreakme</div>
-            </MyId>
-            <More />
-        </ProfButton>
-    );
-};
-
-export default ProfileButton;

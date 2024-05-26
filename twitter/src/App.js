@@ -1,6 +1,8 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 import NavBar from "./components/NavBar";
 import TrendBar from "./components/TrendBar";
@@ -21,6 +23,28 @@ const ColumnLine = styled.div`
 `;
 
 function App() {
+    useEffect(() => {
+        async function makeAccount() {
+            try {
+                const response = await axios.get("/accounts/1");
+                if (response.status === 404) {
+                    const info = {
+                        email: "abc123@gmail.com",
+                        password: "abc123!",
+                        nickname: "알",
+                        bio: "새는 알에서 나오기 위해 투쟁한다. 알은 새의 세계이다. 누구든지 태어나려고 하는 자는 하나의 세계를 파괴하여야 한다.",
+                    };
+                    axios
+                        .post("http://52.79.122.30:8080/accounts", info)
+                        .then(console.log);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        makeAccount();
+    }, []);
+
     return (
         <AppContainer>
             <NavBar />
