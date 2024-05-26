@@ -34,9 +34,7 @@ function App() {
                         nickname: "알",
                         bio: "새는 알에서 나오기 위해 투쟁한다. 알은 새의 세계이다. 누구든지 태어나려고 하는 자는 하나의 세계를 파괴하여야 한다.",
                     };
-                    axios
-                        .post("http://52.79.122.30:8080/accounts", info)
-                        .then(console.log);
+                    axios.post("/accounts", info).then(console.log);
                 }
             } catch (error) {
                 console.error(error);

@@ -16,20 +16,19 @@ import axios from "axios";
 import DeleteModal from "../components/DeleteModal";
 
 const TweetDetail = () => {
-    //state.data id만 넘기게 수정하기
     const location = useLocation();
-    const [twtId, setTwtId] = useState(null);
     const [details, setDetails] = useState(null);
     const nav = useNavigate();
 
     useEffect(() => {
-        const URL = `/tweets/${location.state.data.tweetId}`;
+        const URL = `/tweets/${location.state.tweetId}`;
 
         async function getDetails() {
             try {
                 setDetails(null);
                 const res = await axios.get(URL);
                 setDetails(res.data);
+                console.log(details);
             } catch (error) {
                 console.error(error);
             }
@@ -38,12 +37,20 @@ const TweetDetail = () => {
         getDetails();
     }, []);
 
-    const [isModalOpen, setIsModalOpen] = useState("false");
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const modalHandler = (event) => {
         event.stopPropagation();
         event.preventDefault();
-        setIsModalOpen(!isModalOpen);
+        if (details.accountId === 1) {
+            setIsModalOpen(!isModalOpen);
+        }
+    };
+
+    const handleLink = (event) => {
+        if (details.accountId !== 1) {
+            event.preventDefault();
+        }
     };
 
     if (!details) {
@@ -55,7 +62,7 @@ const TweetDetail = () => {
             <DeleteModal
                 isOpen={isModalOpen}
                 modalHandler={modalHandler}
-                twtId={details.twtId}
+                tweetId={details.tweetId}
                 accountId={details.accountId}
             />
             <Header>
@@ -64,7 +71,9 @@ const TweetDetail = () => {
             </Header>
             <TweetContainer>
                 <IdBar>
-                    <ProfPic src={egg} />
+                    <Link onClick={handleLink} to={"/profile"}>
+                        <ProfPic src={egg} />
+                    </Link>
                     <div>
                         <Name>{details.writer}</Name>
                         <Id>{`dontbreakme_${details.accountId}`}</Id>

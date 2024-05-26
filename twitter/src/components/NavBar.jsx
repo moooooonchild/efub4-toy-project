@@ -57,7 +57,7 @@ const NavContainer = styled.div`
     flex-direction: column;
 `;
 
-const HomeButton = styled.div`
+const HomeButton = styled(Link)`
     height: 50px;
     display: flex;
     align-items: center;

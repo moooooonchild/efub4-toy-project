@@ -7,13 +7,13 @@ const TweetContainer = ({ isProf }) => {
     const URL_ALL = "/tweets";
     const URL_MY = "/accounts/1/tweets";
 
-    const [tweetInfo, setTweetInfo] = useState(null);
+    const [tweetInfo, setTweetInfo] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function getTweets() {
             try {
-                setTweetInfo(null);
+                setTweetInfo([]);
                 setLoading(true);
                 const res = isProf
                     ? await axios.get(URL_MY)
@@ -22,10 +22,13 @@ const TweetContainer = ({ isProf }) => {
                 setLoading(false);
             } catch (error) {
                 console.error(error);
+                setLoading(false);
             }
         }
         getTweets();
     }, []);
+
+    const tweets = isProf ? tweetInfo.accountTweetList : tweetInfo.tweets;
 
     return (
         <div>
@@ -33,25 +36,19 @@ const TweetContainer = ({ isProf }) => {
                 <div>loading...</div>
             ) : (
                 <div>
-                    {isProf
-                        ? tweetInfo.accountTweetList.map((twt) => (
-                              <Tweet
-                                  tweetId={twt.tweetId}
-                                  img={egg}
-                                  name={twt.writer}
-                                  accountId={twt.accountId}
-                                  text={twt.content}
-                              />
-                          ))
-                        : tweetInfo.tweets.map((twt) => (
-                              <Tweet
-                                  tweetId={twt.tweetId}
-                                  img={egg}
-                                  name={twt.writer}
-                                  accountId={twt.accountId}
-                                  text={twt.content}
-                              />
-                          ))}
+                    {tweets
+                        .slice()
+                        .reverse()
+                        .map((twt) => (
+                            <Tweet
+                                key={twt.tweetId}
+                                tweetId={twt.tweetId}
+                                img={egg}
+                                name={twt.writer}
+                                accountId={twt.accountId}
+                                text={twt.content}
+                            />
+                        ))}
                 </div>
             )}
         </div>

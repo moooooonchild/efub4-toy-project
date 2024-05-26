@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { GiConsoleController } from "react-icons/gi";
 
-const DeleteModal = ({ isOpen, modalHandler, twtId, accountId }) => {
+const DeleteModal = ({ isOpen, modalHandler, tweetId, accountId }) => {
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -16,8 +16,8 @@ const DeleteModal = ({ isOpen, modalHandler, twtId, accountId }) => {
         };
     }, [isOpen]);
 
-    async function deleteTweet(twtId, accountId) {
-        const URL = `/tweets/${twtId}?accountId=${accountId}`;
+    async function deleteTweet(tweetId, accountId) {
+        const URL = `/tweets/${tweetId}?accountId=${accountId}`;
         console.log(URL);
         try {
             const res = await axios.delete(URL);
@@ -53,7 +53,7 @@ const DeleteModal = ({ isOpen, modalHandler, twtId, accountId }) => {
                     onClick={(event) => {
                         event.stopPropagation();
                         event.preventDefault();
-                        deleteTweet(twtId, accountId);
+                        deleteTweet(tweetId, accountId);
                     }}
                 >
                     Delete

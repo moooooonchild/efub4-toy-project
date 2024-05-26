@@ -12,31 +12,32 @@ import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
 
 const Tweet = ({ tweetId, img, name, accountId, text }) => {
-    const data = {
-        tweetId: tweetId,
-        img: img,
-        name: name,
-        accountId: accountId,
-        text: text,
-    };
-
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const modalHandler = (event) => {
         event.stopPropagation();
         event.preventDefault();
-        setIsModalOpen(!isModalOpen);
+        if (accountId === 1) {
+            setIsModalOpen(!isModalOpen);
+        }
+    };
+
+    const handleLink = (event) => {
+        if (accountId !== 1) {
+            event.preventDefault();
+        }
     };
 
     return (
-        <ContentContainer to={`/detail`} state={{ data: data }}>
+        <ContentContainer to={`/detail`} state={{ tweetId }}>
             <DeleteModal
                 isOpen={isModalOpen}
                 modalHandler={modalHandler}
-                twtId={tweetId}
+                tweetId={tweetId}
                 accountId={accountId}
             />
             <Link
+                onClick={handleLink}
                 to={"/profile"}
                 style={{
                     textDecoration: "none",

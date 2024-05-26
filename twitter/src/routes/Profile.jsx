@@ -11,22 +11,23 @@ import { useEffect, useState } from "react";
 const Profile = () => {
     const nav = useNavigate();
     const [userData, setUserData] = useState(null);
+    const [twtNum, setTwtNum] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const URL = "/accounts/1";
+        const URL2 = "/accounts/1/tweets";
 
         async function getUserData() {
             try {
                 setLoading(true);
                 const res = await axios.get(URL);
-                console.log(res.data);
+                const res2 = await axios.get(URL2);
                 setUserData(res.data);
+                setTwtNum(res2.data.count);
                 setLoading(false);
-                console.log("성공");
             } catch (error) {
                 console.error(error);
-                console.log("실패");
             }
         }
 
@@ -53,7 +54,7 @@ const Profile = () => {
                             <div
                                 style={{ fontSize: "13px", color: "darkgray" }}
                             >
-                                412 posts
+                                {twtNum} posts
                             </div>
                         </div>
                     </Header>
