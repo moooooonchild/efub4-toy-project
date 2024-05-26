@@ -29,6 +29,7 @@ const TweetContainer = ({ isProf }) => {
     }, []);
 
     const tweets = isProf ? tweetInfo.accountTweetList : tweetInfo.tweets;
+    console.log(tweets);
 
     return (
         <div>
