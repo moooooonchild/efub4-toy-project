@@ -4,8 +4,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const TweetContainer = ({ isProf }) => {
-    const URL_ALL = "/tweets";
-    const URL_MY = "/accounts/1/tweets";
+    const BASE_URL = process.env.REACT_APP_API_URL;
+    const URL_ALL = `${BASE_URL}tweets`;
+    const URL_MY = `${BASE_URL}accounts/1/tweets`;
 
     const [tweetInfo, setTweetInfo] = useState(null);
     const [loading, setLoading] = useState(true);

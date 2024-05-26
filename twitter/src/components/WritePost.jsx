@@ -10,7 +10,8 @@ import { LuCalendarClock } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
 
 const WritePost = () => {
-    const URL = "/tweets";
+    const BASE_URL = process.env.REACT_APP_API_URL;
+    const URL = `${BASE_URL}tweets`;
 
     async function post() {
         const content = document.querySelector("textarea").value;

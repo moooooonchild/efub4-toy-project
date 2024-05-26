@@ -17,7 +17,8 @@ const DeleteModal = ({ isOpen, modalHandler, tweetId, accountId }) => {
     }, [isOpen]);
 
     async function deleteTweet(tweetId, accountId) {
-        const URL = `/tweets/${tweetId}?accountId=${accountId}`;
+        const BASE_URL = process.env.REACT_APP_API_URL;
+        const URL = `${BASE_URL}tweets/${tweetId}?accountId=${accountId}`;
         console.log(URL);
         try {
             const res = await axios.delete(URL);

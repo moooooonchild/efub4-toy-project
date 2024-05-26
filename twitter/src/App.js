@@ -25,8 +25,10 @@ const ColumnLine = styled.div`
 function App() {
     useEffect(() => {
         async function makeAccount() {
+            const BASE_URL = process.env.REACT_APP_API_URL;
+
             try {
-                const response = await axios.get("/accounts/1");
+                const response = await axios.get(`${BASE_URL}accounts/1`);
                 if (response.status === 404) {
                     const info = {
                         email: "abc123@gmail.com",
@@ -34,7 +36,7 @@ function App() {
                         nickname: "알",
                         bio: "새는 알에서 나오기 위해 투쟁한다. 알은 새의 세계이다. 누구든지 태어나려고 하는 자는 하나의 세계를 파괴하여야 한다.",
                     };
-                    axios.post("/accounts", info).then(console.log);
+                    axios.post(`${BASE_URL}accounts`, info).then(console.log);
                 }
             } catch (error) {
                 console.error(error);
