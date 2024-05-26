@@ -19,6 +19,7 @@ const TweetContainer = ({ isProf }) => {
                     ? await axios.get(URL_MY)
                     : await axios.get(URL_ALL);
                 setTweetInfo(res.data);
+                console.log("data : " + tweetInfo);
                 setLoading(false);
             } catch (error) {
                 console.error(error);
@@ -29,7 +30,7 @@ const TweetContainer = ({ isProf }) => {
     }, []);
 
     const tweets = isProf ? tweetInfo.accountTweetList : tweetInfo.tweets;
-    console.log(tweets);
+    console.log("tweets : " + tweets);
 
     return (
         <div>
