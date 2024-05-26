@@ -7,19 +7,18 @@ const TweetContainer = ({ isProf }) => {
     const URL_ALL = "/tweets";
     const URL_MY = "/accounts/1/tweets";
 
-    const [tweetInfo, setTweetInfo] = useState([]);
+    const [tweetInfo, setTweetInfo] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function getTweets() {
             try {
-                setTweetInfo([]);
                 setLoading(true);
                 const res = isProf
                     ? await axios.get(URL_MY)
                     : await axios.get(URL_ALL);
                 setTweetInfo(res.data);
-                console.log("data : " + tweetInfo);
+                console.log("data : " + res.data);
                 setLoading(false);
             } catch (error) {
                 console.error(error);
@@ -27,31 +26,37 @@ const TweetContainer = ({ isProf }) => {
             }
         }
         getTweets();
-    }, []);
+    }, [isProf]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!tweetInfo) {
+        return <div>데이터를 불러오는데 실패</div>;
+    }
 
     const tweets = isProf ? tweetInfo.accountTweetList : tweetInfo.tweets;
     console.log("tweets : " + tweets);
 
     return (
         <div>
-            {loading ? (
-                <div>loading...</div>
+            {tweets && tweets.length > 0 ? (
+                tweets
+                    .slice()
+                    .reverse()
+                    .map((twt) => (
+                        <Tweet
+                            key={twt.tweetId}
+                            tweetId={twt.tweetId}
+                            img={egg}
+                            name={twt.writer}
+                            accountId={twt.accountId}
+                            text={twt.content}
+                        />
+                    ))
             ) : (
-                <div>
-                    {tweets
-                        .slice()
-                        .reverse()
-                        .map((twt) => (
-                            <Tweet
-                                key={twt.tweetId}
-                                tweetId={twt.tweetId}
-                                img={egg}
-                                name={twt.writer}
-                                accountId={twt.accountId}
-                                text={twt.content}
-                            />
-                        ))}
-                </div>
+                <div>no tweets</div>
             )}
         </div>
     );
