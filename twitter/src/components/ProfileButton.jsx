@@ -9,14 +9,13 @@ const ProfileButton = () => {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const BASE_URL = process.env.REACT_APP_API_URL;
-    const URL = `${BASE_URL}/accounts/1`;
+    const URL = `${BASE_URL}accounts/1`;
 
     useEffect(() => {
         async function getUserData() {
             try {
                 const res = await axios.get(URL);
                 setUserData(res.data);
-                console.log(res.data);
                 setLoading(false);
             } catch (error) {
                 console.error(error);

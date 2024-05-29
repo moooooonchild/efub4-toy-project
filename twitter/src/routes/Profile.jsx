@@ -16,8 +16,8 @@ const Profile = () => {
 
     useEffect(() => {
         const BASE_URL = process.env.REACT_APP_API_URL;
-        const URL = `${BASE_URL}/accounts/1`;
-        const URL2 = `${BASE_URL}/accounts/1/tweets`;
+        const URL = `${BASE_URL}accounts/1`;
+        const URL2 = `${BASE_URL}accounts/1/tweets`;
 
         async function getUserData() {
             try {
