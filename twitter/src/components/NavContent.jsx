@@ -12,11 +12,19 @@ const NavContent = ({ img, name }) => {
 export default NavContent;
 
 const ContentContainer = styled.div`
-    width: 242px;
     height: 50.25px;
-
     display: flex;
     align-items: center;
+
+    @media screen and (min-width: 1300px) {
+        width: 242px;
+    }
+
+    @media screen and (max-width: 1300px) {
+        & > div {
+            display: none;
+        }
+    }
 `;
 
 const NavText = styled.div`

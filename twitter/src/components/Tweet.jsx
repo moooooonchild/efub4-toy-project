@@ -11,7 +11,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
 
-const Tweet = ({ tweetId, img, name, accountId, text }) => {
+const Tweet = ({ tweetId, img, name, accountId, time, text }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const modalHandler = (event) => {
@@ -51,7 +51,7 @@ const Tweet = ({ tweetId, img, name, accountId, text }) => {
             <TweetContainer>
                 <IdBar>
                     <Name>{name}</Name>
-                    <Id>{`@dontbreakme_${accountId}`}</Id>
+                    <Id>{`@egg_${accountId}ㆍ${time}`}</Id>
                     <More onClick={modalHandler} />
                 </IdBar>
                 <TweetText>{text}</TweetText>

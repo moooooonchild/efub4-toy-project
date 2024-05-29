@@ -1,12 +1,8 @@
-import Tweet from "../components/Tweet";
 import WritePost from "../components/WritePost";
 import styled from "styled-components";
 import { FiSettings } from "react-icons/fi";
-import axios from "axios";
 
-import egg from "../assets/egg.PNG";
 import TweetContainer from "../components/TweetContainer";
-import { useState, useEffect } from "react";
 
 const Home = () => {
     return (
@@ -51,6 +47,9 @@ const MainContainer = styled.div`
 `;
 
 const MainHeader = styled.div`
+    position: sticky;
+    top: 0;
+    background-color: #000000dc;
     height: 53px;
     display: flex;
     align-items: center;

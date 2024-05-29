@@ -8,15 +8,15 @@ const TrendBar = () => {
             <SearchBar />
             <TrendContainer>
                 <TrendsForMe>Trends for you</TrendsForMe>
-                <TrendContent name={"실트 1위"} postNum={"20,136"} />
-                <TrendContent name={"실트 2위"} postNum={"20,136"} />
-                <TrendContent name={"실트 3위"} postNum={"20,136"} />
-                <TrendContent name={"실트 4위"} postNum={"20,136"} />
-                <TrendContent name={"실트 5위"} postNum={"20,136"} />
-                <TrendContent name={"실트 6위"} postNum={"20,136"} />
-                <TrendContent name={"실트 7위"} postNum={"20,136"} />
-                <TrendContent name={"실트 8위"} postNum={"20,136"} />
-                <TrendContent name={"실트 10000위"} postNum={"20,136"} />
+                <TrendContent name={"EFUB"} postNum={"20,136"} />
+                <TrendContent name={"이펍 최고"} postNum={"3,335"} />
+                <TrendContent name={"개발조아"} postNum={"5,643"} />
+                <TrendContent name={"그냥 자고싶"} postNum={"1,445"} />
+                <TrendContent name={"아바디뱅"} postNum={"3,561"} />
+                <TrendContent name={"이펍 가입"} postNum={"6,175"} />
+                <TrendContent name={"마라탕후루"} postNum={"40,802"} />
+                <TrendContent name={"탕탕 후루후루"} postNum={"7,858"} />
+                <TrendContent name={"이재현 존잘"} postNum={"97,913"} />
             </TrendContainer>
         </ContentContainer>
     );
@@ -25,9 +25,13 @@ const TrendBar = () => {
 export default TrendBar;
 
 const ContentContainer = styled.div`
+    position: sticky;
+    top: 0;
+
     display: flex;
     flex-direction: column;
     width: 348px;
+    height: 900px;
     padding-top: 5px;
     padding-left: 20px;
 `;

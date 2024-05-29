@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -37,7 +37,7 @@ const Profile = () => {
     return (
         <MainContainer>
             {loading ? (
-                <div>loading...</div>
+                <div></div>
             ) : (
                 <>
                     <Header>
@@ -73,7 +73,7 @@ const Profile = () => {
                             <div
                                 style={{ fontSize: "15px", color: "darkgray" }}
                             >
-                                {`@dontbreakme_${userData?.accountId}`}
+                                {`@egg_${userData?.accountId}`}
                             </div>
                         </NamenId>
                         <div>{userData?.bio}</div>

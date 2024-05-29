@@ -21,11 +21,10 @@ import pen from "../assets/quill-pen.png";
 const NavBar = () => {
     return (
         <NavContainer>
-            <HomeButton to="/">
-                <AppIcon></AppIcon>
-            </HomeButton>
-
             <div>
+                <Link to="/" style={{ textDecoration: "none" }}>
+                    <NavContent img={twitter} name={""} />
+                </Link>
                 <Link to="/" style={{ textDecoration: "none" }}>
                     <NavContent img={home} name={"Home"} />
                 </Link>
@@ -43,7 +42,10 @@ const NavBar = () => {
 
                 <NavContent img={more} name={"More"} />
             </div>
-            <PostButton>Post</PostButton>
+            <PostButton>
+                Post
+                <PostIcon src={pen} />
+            </PostButton>
             <ProfileButton />
         </NavContainer>
     );
@@ -52,21 +54,18 @@ const NavBar = () => {
 export default NavBar;
 
 const NavContainer = styled.div`
-    width: 242px;
+    position: sticky;
+    top: 0;
+    //width: 242px;
+    height: 800px;
     display: flex;
     flex-direction: column;
-`;
-
-const HomeButton = styled(Link)`
-    height: 50px;
-    display: flex;
     align-items: center;
-`;
+    padding-right: 10px;
 
-const AppIcon = styled(BsTwitterX)`
-    color: #ffffff;
-    width: 25px;
-    height: 25px;
+    @media screen and (max-width: 1300px) {
+        width: 52px;
+    }
 `;
 
 const PostButton = styled.button`
@@ -91,4 +90,19 @@ const PostButton = styled.button`
         "Helvetica Neue", Arial, sans-serif;
     font-size: 17px;
     font-weight: bold;
+
+    @media screen and (max-width: 1300px) {
+        width: 52px;
+        font-size: 0;
+    }
+`;
+
+const PostIcon = styled.img`
+    @media screen and (min-width: 1300px) {
+        display: none;
+    }
+    @media screen and (max-width: 1300px) {
+        width: 30px;
+        height: 30px;
+    }
 `;

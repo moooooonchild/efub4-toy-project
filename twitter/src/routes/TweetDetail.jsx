@@ -28,7 +28,6 @@ const TweetDetail = () => {
                 setDetails(null);
                 const res = await axios.get(URL);
                 setDetails(res.data);
-                console.log(details);
             } catch (error) {
                 console.error(error);
             }
@@ -54,8 +53,39 @@ const TweetDetail = () => {
     };
 
     if (!details) {
-        return <div style={{ width: "598px" }}>Loading...</div>;
+        return <div style={{ width: "598px" }}></div>;
     }
+
+    const getTime = (createdDate) => {
+        const date = new Date(createdDate);
+        let hours = date.getHours();
+        const minutes = date.getMinutes();
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours ? hours : 12; // 0을 12로 변환
+        const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+
+        // 날짜 포맷
+        const year = date.getFullYear();
+        const monthNames = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ];
+        const month = monthNames[date.getMonth()];
+        const day = date.getDate();
+
+        return `${hours}:${formattedMinutes} ${ampm}ㆍ${month} ${day}, ${year}`;
+    };
 
     return (
         <ContentContainer>
@@ -76,12 +106,12 @@ const TweetDetail = () => {
                     </Link>
                     <div>
                         <Name>{details.writer}</Name>
-                        <Id>{`dontbreakme_${details.accountId}`}</Id>
+                        <Id>{`egg_${details.accountId}`}</Id>
                     </div>
                     <More onClick={modalHandler} />
                 </IdBar>
                 <TweetText>{details.content}</TweetText>
-                <TweetInfo>4:12 PMㆍDec 6, 2017ㆍ100 Views</TweetInfo>
+                <TweetInfo>{getTime(details.createdDate)}</TweetInfo>
             </TweetContainer>
             <RowLine />
             <ViewEng>
