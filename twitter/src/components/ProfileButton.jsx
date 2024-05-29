@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 const ProfileButton = () => {
     const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const URL = "/accounts/1";
 
     useEffect(() => {
@@ -14,6 +15,7 @@ const ProfileButton = () => {
             try {
                 const res = await axios.get(URL);
                 setUserData(res.data);
+                setLoading(false);
             } catch (error) {
                 console.error(error);
             }
@@ -24,15 +26,23 @@ const ProfileButton = () => {
 
     return (
         <ProfButton>
-            <ProfPic src={egg} />
-            <MyId>
-                <div style={{ fontWeight: "bold" }}>{userData?.nickname}</div>
-                <div style={{ color: "darkgray" }}>
-                    {" "}
-                    {`@egg_${userData?.accountId}`}
-                </div>
-            </MyId>
-            <More />
+            {loading ? (
+                <div></div>
+            ) : (
+                <>
+                    <ProfPic src={egg} />
+                    <MyId>
+                        <div style={{ fontWeight: "bold" }}>
+                            {userData?.nickname}
+                        </div>
+                        <div style={{ color: "darkgray" }}>
+                            {" "}
+                            {`@egg_${userData?.accountId}`}
+                        </div>
+                    </MyId>
+                    <More />
+                </>
+            )}
         </ProfButton>
     );
 };

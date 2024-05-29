@@ -18,6 +18,7 @@ import DeleteModal from "../components/DeleteModal";
 const TweetDetail = () => {
     const location = useLocation();
     const [details, setDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
     const nav = useNavigate();
 
     useEffect(() => {
@@ -28,6 +29,7 @@ const TweetDetail = () => {
                 setDetails(null);
                 const res = await axios.get(URL);
                 setDetails(res.data);
+                setLoading(false);
             } catch (error) {
                 console.error(error);
             }
@@ -89,60 +91,68 @@ const TweetDetail = () => {
 
     return (
         <ContentContainer>
-            <DeleteModal
-                isOpen={isModalOpen}
-                modalHandler={modalHandler}
-                tweetId={details.tweetId}
-                accountId={details.accountId}
-            />
-            <Header>
-                <Arrow onClick={() => nav(-1)} />
-                <div style={{ fontSize: "20px", fontWeight: "bold" }}>Post</div>
-            </Header>
-            <TweetContainer>
-                <IdBar>
-                    <Link onClick={handleLink} to={"/profile"}>
+            {loading ? (
+                <div></div>
+            ) : (
+                <>
+                    <DeleteModal
+                        isOpen={isModalOpen}
+                        modalHandler={modalHandler}
+                        tweetId={details.tweetId}
+                        accountId={details.accountId}
+                    />
+                    <Header>
+                        <Arrow onClick={() => nav(-1)} />
+                        <div style={{ fontSize: "20px", fontWeight: "bold" }}>
+                            Post
+                        </div>
+                    </Header>
+                    <TweetContainer>
+                        <IdBar>
+                            <Link onClick={handleLink} to={"/profile"}>
+                                <ProfPic src={egg} />
+                            </Link>
+                            <div>
+                                <Name>{details.writer}</Name>
+                                <Id>{`egg_${details.accountId}`}</Id>
+                            </div>
+                            <More onClick={modalHandler} />
+                        </IdBar>
+                        <TweetText>{details.content}</TweetText>
+                        <TweetInfo>{getTime(details.createdDate)}</TweetInfo>
+                    </TweetContainer>
+                    <RowLine />
+                    <ViewEng>
+                        <IoIosStats style={{ marginRight: "5px" }} />
+                        <div>View post engagements</div>
+                    </ViewEng>
+                    <RowLine />
+                    <IconBar>
+                        <Icon>
+                            <FaRegComment />
+                        </Icon>
+                        <Icon>
+                            <FaRetweet />
+                        </Icon>
+                        <Icon>
+                            <FaRegHeart />
+                        </Icon>
+                        <Icon>
+                            <FaRegBookmark />
+                        </Icon>
+                        <Icon>
+                            <MdOutlineFileUpload />
+                        </Icon>
+                    </IconBar>
+                    <RowLine />
+                    <Reply>
                         <ProfPic src={egg} />
-                    </Link>
-                    <div>
-                        <Name>{details.writer}</Name>
-                        <Id>{`egg_${details.accountId}`}</Id>
-                    </div>
-                    <More onClick={modalHandler} />
-                </IdBar>
-                <TweetText>{details.content}</TweetText>
-                <TweetInfo>{getTime(details.createdDate)}</TweetInfo>
-            </TweetContainer>
-            <RowLine />
-            <ViewEng>
-                <IoIosStats style={{ marginRight: "5px" }} />
-                <div>View post engagements</div>
-            </ViewEng>
-            <RowLine />
-            <IconBar>
-                <Icon>
-                    <FaRegComment />
-                </Icon>
-                <Icon>
-                    <FaRetweet />
-                </Icon>
-                <Icon>
-                    <FaRegHeart />
-                </Icon>
-                <Icon>
-                    <FaRegBookmark />
-                </Icon>
-                <Icon>
-                    <MdOutlineFileUpload />
-                </Icon>
-            </IconBar>
-            <RowLine />
-            <Reply>
-                <ProfPic src={egg} />
-                <ReplyText placeholder="Post your reply" />
-                <ReplyBtn>Reply</ReplyBtn>
-            </Reply>
-            <RowLine />
+                        <ReplyText placeholder="Post your reply" />
+                        <ReplyBtn>Reply</ReplyBtn>
+                    </Reply>
+                    <RowLine />
+                </>
+            )}
         </ContentContainer>
     );
 };
