@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 const ProfileButton = () => {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const URL = "/accounts/1";
+    const BASE_URL = process.env.REACT_APP_API_URL;
+    const URL = `${BASE_URL}/accounts/1`;
 
     useEffect(() => {
         async function getUserData() {

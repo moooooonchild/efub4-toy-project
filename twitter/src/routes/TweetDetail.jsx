@@ -22,7 +22,8 @@ const TweetDetail = () => {
     const nav = useNavigate();
 
     useEffect(() => {
-        const URL = `/tweets/${location.state.tweetId}`;
+        const BASE_URL = process.env.REACT_APP_API_URL;
+        const URL = `${BASE_URL}/tweets/${location.state.tweetId}`;
 
         async function getDetails() {
             try {
