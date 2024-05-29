@@ -15,6 +15,7 @@ const ProfileButton = () => {
             try {
                 const res = await axios.get(URL);
                 setUserData(res.data);
+                console.log(res.data);
                 setLoading(false);
             } catch (error) {
                 console.error(error);
