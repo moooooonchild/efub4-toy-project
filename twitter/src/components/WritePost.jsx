@@ -102,6 +102,7 @@ const Tweet = styled.textarea`
     padding: 12px 0;
     padding-left: 10px;
     margin: 0;
+    resize: none;
 
     font-family: inherit;
     font-size: 20px;
